@@ -59,13 +59,13 @@ class Game extends React.Component {
 		const history = this.state.history.slice(0,
 			this.state.stepNumber + 1);
 		const current = history[history.length - 1];
-		const squares = current.squares.slice();
+		const squares = current.squares.slice(); // prefer slice for immutability
 		if (calculateWinner(squares) || squares[i]) {
 			return;
 		}
 		squares[i] = this.state.xIsNext ? 'X' : 'O';
 		this.setState({
-			history: history.concat([{
+			history: history.concat([{ // prefer concat for immutability
 				squares: squares,
 			}]),
 			stepNumber: history.length,
@@ -87,7 +87,7 @@ class Game extends React.Component {
 			calculateWinner(current.squares);
 
 		const moves = history.map((step, move) => {
-			const desc = move ?
+			const desc = move ? // this works because 0 is falsey
 				'Go to move # ' + move :
 				'Go to game start';
 			return (
